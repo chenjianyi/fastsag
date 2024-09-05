@@ -15,7 +15,7 @@ Demo page can be found at [demo](https://fastsag.github.io/).
   year={2024}
 }
 ```
-## Preparation
+### Preparation
 1. Download this code:
 
 ```
@@ -49,3 +49,7 @@ python3 train.py --data_dir YOUR_TRAIN_DATA --data_dir_testset YOUR_TEST_DATA --
 ```
 python3 generate.py --ckpt TRAINED_MODEL --data_dir DATA_DIR --result_dir OUTPUT
 ```
+
+### Acknowledgement and reference
+1. [Grad-TTS](https://github.com/huawei-noah/Speech-Backbones/blob/main/Grad-TTS/).
+2. [CoMoSpeech](https://github.com/zhenye234/CoMoSpeech)
