@@ -23,7 +23,7 @@ git clone https://github.com/chenjianyi/fastsag/
 cd fastsag
 ```
 
-2. Download weights from
+2. Download weights from [here](https://hkustconnect-my.sharepoint.com/:f:/g/personal/jchenil_connect_ust_hk/EjM0CpbBGC9NsEMI9iLFyVQBC3A9tDInoG-EGmDciRQqyQ?e=rqfidw)
    and put all weights in fastsag/weights
 
 ### Dataset
