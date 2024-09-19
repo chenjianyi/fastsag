@@ -22,7 +22,7 @@ from torch.nn.utils.rnn import pad_sequence
 from utils_d import (beartype_jit, curtail_to_multiple, default,
                     float32_to_int16, int16_to_float32,
                     zero_mean_unit_var_norm, exists)
-from F0_predictor.DioF0Predictor import DioF0Predictor
+#from F0_predictor.DioF0Predictor import DioF0Predictor
 
 def cast_tuple(val, length = 1):
     return val if isinstance(val, tuple) else ((val,) * length)
@@ -85,7 +85,7 @@ class SoundDataset(Dataset):
         path = Path(folder)
         assert path.exists(), 'folder does not exist'
 
-        self.mixed_F_extractor = DioF0Predictor(sampling_rate=24000, hop_length=256, compute_mixed=True)
+        #self.mixed_F_extractor = DioF0Predictor(sampling_rate=24000, hop_length=256, compute_mixed=True)
 
         files = []
         ignore_files = default(ignore_files, [])
