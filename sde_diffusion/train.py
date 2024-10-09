@@ -12,7 +12,7 @@ import argparse
 
 from hubert_kmeans.model import create_hubert_kmeans_from_config
 from dataset import SoundDataset, get_dataloader
-from BigVGAN.bigvgan_wrapper import BigVGAN 
+from BigVGAN.bigvgan_wrapper import BigVGANWrapper 
 
 import numpy as np
 from tqdm import tqdm
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     parser.add_argument('--n_epochs', default=200, type=int)
     parser.add_argument('--batch_size', default=28, type=int)
     parser.add_argument('--lr', default=1e-4, type=float)
-    parser.add_argument('--bivgan_ckpt', default='../weights/bigvgan_24khz_100band')
+    parser.add_argument('--bivgan_ckpt', default='nvidia/bigvgan_24khz_100band')
     parser.add_argument('--ckpt', default='../weights/fastsag.pt')
     parser.add_argument('--data_dir', default='clips_10s')
     parser.add_argument('--data_dir_testset', default='clips_10s_testset')
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     logger = SummaryWriter(log_dir=summary_dir)
 
     wav2vec = create_hubert_kmeans_from_config(kmeans_path=None, device='cpu')
-    bigvgan = BigVGAN(args.bivgan_ckpt)
+    bigvgan = BigVGANWrapper(args.bivgan_ckpt)
 
     data_key = ('vocal', 'non_vocal')
     normalize = (True, True)
@@ -235,13 +235,11 @@ if __name__ == "__main__":
                                 y_enc = denorm_spec(y_enc)
                                 y_dec = denorm_spec(y_dec)
 
-                            indx = list(range(0, 32)) + [51, 81, 111]
-                            indx2 = list(range(0, 32)) + [19, 49, 79]
                             logger.add_image(f'{image}_{i}/generated_enc',
-                                    plot_tensor(y_enc[:, 32:, :].squeeze().cpu()),
+                                    plot_tensor(y_enc[:, :, :].squeeze().cpu()),
                                              global_step=iteration, dataformats='HWC')
                             logger.add_image(f'{image}_{i}/generated_dec',
-                                    plot_tensor(y_dec[:, 32:, :].squeeze().cpu()),
+                                    plot_tensor(y_dec[:, :, :].squeeze().cpu()),
                                              global_step=iteration, dataformats='HWC')
                             save_plot(y_enc.squeeze().cpu(), 
                                       f'{log_dir}/image/generated_enc_{image}_{i}.png')
