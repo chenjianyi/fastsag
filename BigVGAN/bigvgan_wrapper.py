@@ -11,17 +11,19 @@ import torch
 from scipy.io.wavfile import write
 from attrdict import AttrDict
 from meldataset import mel_spectrogram, MAX_WAV_VALUE
-from models import BigVGAN as Generator
+#from models import BigVGAN as Generator
 import librosa
 import torch.nn as nn
+from bigvgan import BigVGAN
 
 h = None
 device = None
 torch.backends.cudnn.benchmark = False
 
-class BigVGAN(nn.Module):
-    def __init__(self, ckpt_dir):
-        super(BigVGAN, self).__init__()
+class BigVGANWrapper(nn.Module):
+    def __init__(self, model='nvidia/bigvgan_v2_24khz_100band_256x'):
+        super(BigVGANWrapper, self).__init__()
+        """
         config_file = os.path.join(ckpt_dir, 'config.json')
         ckpt_path = os.path.join(ckpt_dir, 'g_05000000.zip')
         with open(config_file) as f:
@@ -32,6 +34,10 @@ class BigVGAN(nn.Module):
         self.generator = Generator(self.config)
         state_dict_g = self.load_checkpoint(ckpt_path)['generator']
         self.generator.load_state_dict(state_dict_g)
+        """
+
+        self.generator = BigVGAN.from_pretrained(model, use_cuda_kernel=False)
+        self.config = self.generator.h
 
     def load_checkpoint(self, filepath, device='cpu'):
         assert os.path.isfile(filepath)

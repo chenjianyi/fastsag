@@ -26,7 +26,7 @@ cd fastsag
 2. Download fastsag checkpoint from [here](https://hkustconnect-my.sharepoint.com/:f:/g/personal/jchenil_connect_ust_hk/EjM0CpbBGC9NsEMI9iLFyVQBC3A9tDInoG-EGmDciRQqyQ?e=rqfidw)
    and put all weights in fastsag/weights
 
-   BigvGAN checkpoints could be downloaded from [BigvGAN](https://github.com/NVIDIA/BigVGAN). The checkpoints we used is "bigvgan_24khz_100band".
+   BigvGAN checkpoints could be downloaded from [BigvGAN](https://github.com/NVIDIA/BigVGAN). The checkpoints we used is "bigvgan_24khz_100band". I upgrade BigvGAN to BigvGAN-v2, and the checkpoints would be downloaded automatically.
 
    [MERT](https://huggingface.co/papers/2306.00107) pretrained checkpoints would be downloaded automatically from huggingface. Please make sure your sever could access huggingface.
 
