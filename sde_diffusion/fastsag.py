@@ -109,7 +109,7 @@ class FastSAG(BaseModule):
         semantic_x2y = self.semantic_encoder[0](x['semantic'].permute(0, 2, 1)).permute(0, 2, 1)  # wavenet
         semantic_xy = semantic_x2y + x['semantic']
 
-        use_interpolate = True
+        use_interpolate = False
         if use_interpolate:
             semantic2mel = F.interpolate(semantic_xy.permute(0, 2, 1).unsqueeze(1), size=(d, T), mode='bilinear', align_corners=False)[:, 0, ...]
         else:
